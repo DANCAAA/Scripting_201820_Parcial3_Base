@@ -2,6 +2,7 @@
 
 public class AIMoveTest : MonoBehaviour
 {
+    // Singleton!
     public static AIMoveTest Instance { get; private set; }
 
     public delegate void OnAIMoveIssued();
@@ -17,17 +18,15 @@ public class AIMoveTest : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        FindObjectOfType<GameController>().onGameStart += ExecuteOnAIMoveIssued;
     }
 
-    // Update is called once per frame
-    private void Update()
+    private void ExecuteOnAIMoveIssued()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (onAIMoveIssued != null)
         {
-            if (onAIMoveIssued != null)
-            {
-                onAIMoveIssued(); 
-            }
+            onAIMoveIssued();
         }
     }
 }

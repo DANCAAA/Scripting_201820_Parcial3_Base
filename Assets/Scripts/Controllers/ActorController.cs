@@ -9,7 +9,7 @@ public abstract class ActorController : MonoBehaviour
 
     [SerializeField]
     protected Color baseColor = Color.blue;
-
+    [SerializeField]
     protected Color taggedColor = Color.red;
 
     protected MeshRenderer renderer;
@@ -19,6 +19,16 @@ public abstract class ActorController : MonoBehaviour
     public OnActorTagged onActorTagged;
 
     public bool IsTagged { get; protected set; }
+
+    public int taggedCount
+    {
+        get; private set;
+    }
+
+    private void Awake()
+    {
+        FindObjectOfType<GameController>().onGameEnd += Stop;
+    }
 
     // Use this for initialization
     protected virtual void Start()
@@ -62,10 +72,33 @@ public abstract class ActorController : MonoBehaviour
     {
         IsTagged = val;
 
+        if (IsTagged)
+        {
+            taggedCount++;
+
+            FindObjectOfType<GameController>().SetCurrentPlayerTagged(this);
+        }
+
         if (renderer)
         {
             print(string.Format("Changing color to {0}", gameObject.name));
+
             renderer.material.color = val ? taggedColor : baseColor;
         }
+    }
+
+    private void Stop()
+    {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+
+        if (agent != null)
+            agent.enabled = false;
+
+        Rigidbody rigidbody = GetComponent<Rigidbody>();
+
+        if (rigidbody != null)
+            rigidbody.isKinematic = true;
+
+        // TODO Time scale 0 ???
     }
 }

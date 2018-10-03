@@ -3,17 +3,20 @@
 public abstract class Composite : Node
 {
     [SerializeField]
-    protected Node[] children;
+    protected Task[] children;
 
     protected abstract bool MustAllChildrenSucceed { get; }
 
     public override bool Execute()
     {
-        bool result = MustAllChildrenSucceed;
+        bool result = true;
+        int childCount = 0;
 
         foreach (Node node in children)
         {
             result = result && node.Execute();
+
+            print(string.Format("Executed sequence child {0} with result {1}", childCount, result));
 
             if (ShouldBreak(result))
             {
