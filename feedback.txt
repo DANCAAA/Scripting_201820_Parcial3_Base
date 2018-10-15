@@ -1,0 +1,18 @@
+Feedback
+
+Examen (1.1/5.0)
+ * La escena por defecto tiene 4 jugadores puestos en la misma posición. Si los cambio de posición no se mueven, y si altero la cantidad de jugadores en el GameController no pasa nada.
+ * El temporizador del juego no se actualiza en el UI, y cuando termina el tiempo no pasa nada (ni un log en consola)
+ * Los prefabs de AI no tienen asignado su árbol de comportamiento. Por esto, los agentes no se mueven.
+ * BT no completado (0.6/1.8)
+	* ActorIsTagged, FleeFromTarget, IsTaggedActorNear, StopMovement no implementados.
+	* FollowTarget, GetNearestTarget implementados, pero no puedo probarlos.
+ * El contador de cuántas veces el actor ha sido 'tagged' está, pero no lo puedo probar (0.5)
+ * GetNearestTarget no tiene en cuenta cuál fue el último jugador 'tagged' para determinar si lo puede o no perseguir.
+
+Bonificación (0.0/0.5)
+ * En el readme decía que habías hecho la bonificación de las áreas, pero no veo nada que lo sugiera así. Solo tengo un área navegable y no hay areas custom.
+
+Compensación : 1.0
+
+Total: 2.1 / 5.0
